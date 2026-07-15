@@ -68,9 +68,9 @@ PlasmoidItem {
             var output = data["stdout"].trim();
             var isActive = (output === "active");
             root.vpnActive = isActive;
-            root.currentStatusText = isActive 
-                ? i18n("VPN Active (%1)", plasmoid.configuration.vpnInterface) 
-                : i18n("VPN Disconnected");
+            root.currentStatusText = isActive
+            ? i18n("VPN Active (%1)", plasmoid.configuration.vpnInterface)
+            : i18n("VPN Disconnected");
         }
 
         function exec(cmd) {
@@ -98,7 +98,7 @@ PlasmoidItem {
             height: width
             source: root.vpnActive ? plasmoid.configuration.activeIcon : plasmoid.configuration.inactiveIcon
             isMask: true
-            
+
             // Color active state positive green or highlight, inactive as disabled gray
             color: root.vpnActive ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
 
@@ -111,7 +111,8 @@ PlasmoidItem {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                root.toggleVpn();
+                // Toggles the full popup layout rather than a blind background script
+                plasmoid.expanded = !plasmoid.expanded
             }
         }
     }
@@ -119,50 +120,54 @@ PlasmoidItem {
     // Expanded / Desktop representation
     fullRepresentation: Item {
         id: fullRoot
-        implicitWidth: Kirigami.Units.gridUnit * 12
-        implicitHeight: Kirigami.Units.gridUnit * 6
+        // Match popup size to the layout contents cleanly
+        implicitWidth: mainLayout.implicitWidth + Kirigami.Units.gridUnit * 2
+        implicitHeight: mainLayout.implicitHeight + Kirigami.Units.gridUnit * 2
 
         Kirigami.Card {
             anchors.fill: parent
             anchors.margins: Kirigami.Units.smallSpacing
 
-            contentItem: ColumnLayout {
-                anchors.centerIn: parent
-                spacing: Kirigami.Units.largeSpacing
+            contentItem: Item {
+                ColumnLayout {
+                    id: mainLayout
+                    anchors.centerIn: parent
+                    spacing: Kirigami.Units.largeSpacing
 
-                RowLayout {
-                    spacing: Kirigami.Units.mediumSpacing
-                    Layout.alignment: Qt.AlignHCenter
+                    RowLayout {
+                        spacing: Kirigami.Units.mediumSpacing
+                        Layout.alignment: Qt.AlignHCenter
 
-                    Kirigami.Icon {
-                        source: root.vpnActive ? plasmoid.configuration.activeIcon : plasmoid.configuration.inactiveIcon
-                        implicitWidth: Kirigami.Units.iconSizes.large
-                        implicitHeight: Kirigami.Units.iconSizes.large
-                        isMask: true
-                        color: root.vpnActive ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
+                        Kirigami.Icon {
+                            source: root.vpnActive ? plasmoid.configuration.activeIcon : plasmoid.configuration.inactiveIcon
+                            implicitWidth: Kirigami.Units.iconSizes.large
+                            implicitHeight: Kirigami.Units.iconSizes.large
+                            isMask: true
+                            color: root.vpnActive ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
+                        }
+
+                        ColumnLayout {
+                            spacing: 2
+                            PlasmaComponents.Label {
+                                text: plasmoid.configuration.vpnConnectionName
+                                font.bold: true
+                                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.15
+                            }
+                            PlasmaComponents.Label {
+                                text: root.currentStatusText
+                                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.95
+                                opacity: 0.85
+                            }
+                        }
                     }
 
-                    ColumnLayout {
-                        spacing: 2
-                        PlasmaComponents.Label {
-                            text: plasmoid.configuration.vpnConnectionName
-                            font.bold: true
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.15
+                    PlasmaComponents.Button {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: root.vpnActive ? i18n("Disconnect VPN") : i18n("Connect VPN")
+                        icon.name: root.vpnActive ? "network-disconnect" : "network-connect"
+                        onClicked: {
+                            root.toggleVpn();
                         }
-                        PlasmaComponents.Label {
-                            text: root.currentStatusText
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.95
-                            opacity: 0.85
-                        }
-                    }
-                }
-
-                PlasmaComponents.Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    text: root.vpnActive ? i18n("Disconnect VPN") : i18n("Connect VPN")
-                    icon.name: root.vpnActive ? "network-disconnect" : "network-connect"
-                    onClicked: {
-                        root.toggleVpn();
                     }
                 }
             }
