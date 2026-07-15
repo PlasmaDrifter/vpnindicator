@@ -11,7 +11,7 @@
         "Icon": "network-vpn",
         "Id": "local.widget.vpnindicator",
         "Name": "VPN Status Indicator",
-        "Version": "1.0",
+        "Version": "1.10",
         "Website": ""
     },
     "KPackageStructure": "Plasma/Applet",
