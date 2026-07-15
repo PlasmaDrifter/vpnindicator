@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "jmc@example.com",
+                "Name": "JMC"
+            }
+        ],
+        "Category": "Network",
+        "Description": "Simple VPN indicator showing connection status for wg0/PureVPN with click-to-toggle support",
+        "Icon": "network-vpn",
+        "Id": "local.widget.vpnindicator",
+        "Name": "VPN Status Indicator",
+        "Version": "1.0",
+        "Website": ""
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
