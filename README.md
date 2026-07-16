@@ -2,7 +2,7 @@
 
 A KDE Plasma panel widget that shows whether your VPN (WireGuard `wg0` / PureVPN) is connected, with a click-to-toggle button.
 
-![vpnindicator](vpnindicator.png)
+![vpnindicator](vpnindicator.png) ![vpnindicator](vpnindicator2.png)
 ![vpnindicator](desktop-2.png)
 
 ## Features
