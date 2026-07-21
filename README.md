@@ -12,8 +12,8 @@ A system tray and desktop indicator widget for NetworkManager VPN connections in
 ## Previews
 
 ![VPN Status Indicator Widget Preview](desktop-2.png)
-
-![VPN Status Indicator Widget Preview](vpnindicator.png)
+![VPN Connected Icon Status](vpnindicator2.png)
+![VPN Disconnected Icon Status](vpnindicator.png)
 
 ---
 
