@@ -1,40 +1,50 @@
-# VPN Status Indicator
+# VPN Status Indicator Widget
 
-A KDE Plasma panel widget that shows whether your VPN (WireGuard `wg0` / PureVPN) is connected, with a click-to-toggle button.
+[![KDE Plasma 6](https://img.shields.io/badge/KDE_Plasma-6.0+-3152A0?style=for-the-badge&logo=kde&logoColor=white)](https://kde.org/plasma-desktop/)
+[![QML](https://img.shields.io/badge/UI-QML%2FQt6-41CD52?style=for-the-badge&logo=qt&logoColor=white)](https://doc.qt.io/qt-6/qtqml-index.html)
+[![Category](https://img.shields.io/badge/Network%20%26%20Security-30B0C7?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/PlasmaDrifter)
+[![License](https://img.shields.io/badge/License-GPLv2-blue.svg?style=for-the-badge)](LICENSE)
 
-![vpnindicator](vpnindicator.png) ![vpnindicator](vpnindicator2.png)
-![vpnindicator](desktop-2.png)
+A system tray and desktop indicator widget for NetworkManager VPN connections in KDE Plasma 6.
+
+---
+
+## Previews
+
+![VPN Status Indicator Widget Preview](desktop-2.png)
+
+![VPN Status Indicator Widget Preview](vpnindicator.png)
+
+---
 
 ## Features
 
-- Green / red indicator showing live VPN connection status
-- Click the widget to connect or disconnect
-- Monitors the `wg0` WireGuard interface by default
-- Lightweight — uses a simple shell command to check status
-- No external dependencies beyond WireGuard tools
+- **Real-time**: VPN connection status monitoring via NetworkManager DBus
+- **One-click**: VPN toggle connect/disconnect
+- **Dynamic**: status icon indicators
+- **Supports**: WireGuard, OpenVPN, and Cisco AnyConnect
 
 ## Requirements
 
-- KDE Plasma 6.0+
-- WireGuard (`wg-quick`) installed and configured
-- Appropriate `sudo` / polkit rules for `wg-quick up/down` without a password prompt
+- **Environment**: KDE Plasma 6.0 or higher
+- **Framework**: Qt6 QML / Plasma Applet API
 
 ## Installation
 
+### Option 1: Git Clone (Recommended)
 ```bash
-cd ~/.local/share/plasma/plasmoids/
-git clone https://github.com/PlasmaDrifter/vpnindicator local.widget.vpnindicator
+mkdir -p ~/.local/share/plasma/plasmoids/
+git clone https://github.com/PlasmaDrifter/vpnindicator.git ~/.local/share/plasma/plasmoids/local.widget.vpnindicator
 ```
 
-Then right-click your panel → **Add Widgets** → search for **VPN Status Indicator**.
+### Option 2: Plasma Package Installer
+```bash
+kpackagetool6 -i ~/.local/share/plasma/plasmoids/local.widget.vpnindicator
+```
 
-## Configuration
+Then right-click your desktop or panel $\rightarrow$ **Add Widgets...** and search for the widget name.
 
-Right-click the widget → **Configure…**
+## Credits & License
 
-| Option | Description |
-|--------|-------------|
-| Interface | WireGuard interface name (default: `wg0`) |
-| Connected colour | Indicator colour when VPN is up |
-| Disconnected colour | Indicator colour when VPN is down |
-
+- **Author / Maintainer**: PlasmaDrifter
+- **License**: Licensed under the [GPLv2](LICENSE).
